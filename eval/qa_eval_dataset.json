@@ -1,0 +1,72 @@
+[
+  {
+    "id": "q001",
+    "question": "What is the term length of the contract?",
+    "expected_answer_contains": ["12 months", "one year", "annual"],
+    "document_name": "service_agreement.pdf",
+    "category": "factual"
+  },
+  {
+    "id": "q002",
+    "question": "Who are the parties to this agreement?",
+    "expected_answer_contains": ["Acme", "Tech Solutions"],
+    "document_name": "service_agreement.pdf",
+    "category": "factual"
+  },
+  {
+    "id": "q003",
+    "question": "What is the liability cap?",
+    "expected_answer_contains": ["$500,000", "500000", "five hundred thousand"],
+    "document_name": "service_agreement.pdf",
+    "category": "factual"
+  },
+  {
+    "id": "q004",
+    "question": "Can either party terminate the contract early?",
+    "expected_answer_contains": ["60 days", "notice", "yes"],
+    "document_name": "service_agreement.pdf",
+    "category": "interpretive"
+  },
+  {
+    "id": "q005",
+    "question": "Does the contract automatically renew?",
+    "expected_answer_contains": ["yes", "automatically", "30 days"],
+    "document_name": "service_agreement.pdf",
+    "category": "interpretive"
+  },
+  {
+    "id": "q006",
+    "question": "What law governs this agreement?",
+    "expected_answer_contains": ["California", "State of California"],
+    "document_name": "service_agreement.pdf",
+    "category": "factual"
+  },
+  {
+    "id": "q007",
+    "question": "What are the payment terms?",
+    "expected_answer_contains": ["Net 30", "30 days", "invoice"],
+    "document_name": "service_agreement.pdf",
+    "category": "factual"
+  },
+  {
+    "id": "q008",
+    "question": "Is there an indemnification clause?",
+    "expected_answer_contains": ["yes", "indemnif"],
+    "document_name": "service_agreement.pdf",
+    "category": "yes_no"
+  },
+  {
+    "id": "q009",
+    "question": "What happens to confidential information after termination?",
+    "expected_answer_contains": ["5 years", "survive", "return"],
+    "document_name": "nda.pdf",
+    "category": "interpretive"
+  },
+  {
+    "id": "q010",
+    "question": "Are there any assignment restrictions?",
+    "expected_answer_contains": ["consent", "approval", "may not assign"],
+    "document_name": "service_agreement.pdf",
+    "category": "interpretive"
+  }
+]
