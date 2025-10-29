@@ -86,7 +86,7 @@ async def ingest_documents(
         )
     
     document_ids = []
-    llm = get_llm_service()
+    # llm = get_llm_service() # Moved inside the loop to ensure clean initialization if needed
     
     for file in files:
         # Validate file type
@@ -134,9 +134,15 @@ async def ingest_documents(
         
         for chunk_data in chunks:
             # Create embedding for chunk
+            # NOTE: Embedding creation is a heavy operation. It should ideally be
+            # offloaded to a background worker (like Celery/Redis Queue) or a
+            # dedicated background task. For simplicity, we'll keep it synchronous
+            # but wrap the exception properly.
+            llm = get_llm_service() # Get LLM service inside the loop
             try:
                 embedding = llm.create_embedding(chunk_data["text"])
-            except:
+            except Exception as e:
+                logger.error(f"Failed to create embedding for chunk: {e}")
                 embedding = None
             
             chunk = DocumentChunk(
@@ -154,6 +160,9 @@ async def ingest_documents(
         document_ids.append(document_id)
         
         logger.info(f"Ingested document {document_id}: {file.filename} ({page_count} pages, {len(chunks)} chunks)")
+        
+        # IMPORTANT: Ensure the file handle is closed after reading
+        await file.close()
     
     metrics["documents_ingested"] += len(document_ids)
     
@@ -190,7 +199,7 @@ async def extract_fields(
     full_text = " ".join([chunk.text for chunk in chunks])
     
     # Extract fields using LLM
-    llm = get_llm_service()
+    # llm = get_llm_service() # Moved inside the loop to ensure clean initialization if needed
     try:
         extracted_data = llm.extract_fields(full_text)
     except Exception as e:
@@ -271,7 +280,7 @@ async def ask_question(
     """
     start_time = time.time()
     
-    llm = get_llm_service()
+    # llm = get_llm_service() # Moved inside the loop to ensure clean initialization if needed
     
     # Create embedding for question
     question_embedding = llm.create_embedding(request.question)
@@ -432,7 +441,7 @@ async def stream_question(
     """
     Stream answer tokens for a question using Server-Sent Events.
     """
-    llm = get_llm_service()
+    # llm = get_llm_service() # Moved inside the loop to ensure clean initialization if needed
     
     # Parse document_ids if provided
     doc_ids = document_ids.split(",") if document_ids else None

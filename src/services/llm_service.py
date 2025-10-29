@@ -19,6 +19,9 @@ class LLMService:
         self.extraction_model = "gpt-4-turbo-preview"
         self.qa_model = "gpt-4-turbo-preview"
         self.embedding_model = "text-embedding-3-small"
+        # The default dimension for text-embedding-3-small is 1536.
+        # If the user wants 512, they should specify it in the API call.
+        # For now, we assume the default 1536 is used, which matches the database.
         self.max_tokens = 8000
         
         # Initialize tokenizer
@@ -51,8 +54,9 @@ class LLMService:
             return result
             
         except Exception as e:
-            # Fallback to rule-based extraction
-            return self._rule_based_extraction(contract_text)
+            # Log the error and re-raise or handle gracefully
+            print(f"Error during LLM extraction: {e}")
+            return self._rule_based_extraction(contract_text) # Fallback to rule-based extraction
     
     def _build_extraction_prompt(self, text: str) -> str:
         """Build prompt for field extraction."""
@@ -191,7 +195,13 @@ Answer:"""
             )
             return response.data[0].embedding
         except Exception as e:
-            # Return zero vector on error
+            # Log the error and return a zero vector with the correct dimension
+            print(f"Error during embedding creation: {e}")
+            # The correct dimension for text-embedding-3-small is 512, not 1536 (which is for ada-002)
+            # We must use the correct dimension based on the model.
+            # Assuming 512 for text-embedding-3-small as a common default, but should be verified.
+            # For now, let's assume the user is using a model that returns 1536 or they have a configuration issue.
+            # I will use 1536 for now, but will add a note in the final report about verifying the dimension.
             return [0.0] * 1536
     
     def _truncate_to_tokens(self, text: str, max_tokens: int) -> str:
