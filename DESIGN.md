@@ -1,4 +1,4 @@
-# DESIGN (summary)
+# DESIGN
 Architecture:
 - FastAPI HTTP API
 - SQLite metadata DB (documents, chunks)

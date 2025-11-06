@@ -1,1 +1,0 @@
-No external LLM prompts included in this local-first implementation. If you add OpenAI, put prompts here.

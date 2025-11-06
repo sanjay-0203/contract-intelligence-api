@@ -1,0 +1,52 @@
+{
+  "qa_pairs": [
+    {
+      "id": 1,
+      "question": "What is the effective date of this contract?",
+      "expected_keywords": ["effective", "date", "commence", "begin"],
+      "difficulty": "easy"
+    },
+    {
+      "id": 2,
+      "question": "Who are the parties to this agreement?",
+      "expected_keywords": ["party", "parties", "between", "company", "corporation"],
+      "difficulty": "easy"
+    },
+    {
+      "id": 3,
+      "question": "What are the payment terms?",
+      "expected_keywords": ["payment", "terms", "invoice", "days", "net"],
+      "difficulty": "medium"
+    },
+    {
+      "id": 4,
+      "question": "What is the term of this contract?",
+      "expected_keywords": ["term", "duration", "year", "month", "period"],
+      "difficulty": "medium"
+    },
+    {
+      "id": 5,
+      "question": "What are the confidentiality obligations?",
+      "expected_keywords": ["confidential", "confidentiality", "secret", "proprietary"],
+      "difficulty": "hard"
+    },
+    {
+      "id": 6,
+      "question": "Under which jurisdiction is this contract governed?",
+      "expected_keywords": ["governing", "law", "jurisdiction", "state", "country"],
+      "difficulty": "medium"
+    },
+    {
+      "id": 7,
+      "question": "What is the liability cap in this contract?",
+      "expected_keywords": ["liability", "cap", "limit", "maximum", "amount"],
+      "difficulty": "hard"
+    },
+    {
+      "id": 8,
+      "question": "What are the termination conditions?",
+      "expected_keywords": ["termination", "terminate", "end", "cause", "notice"],
+      "difficulty": "hard"
+    }
+  ]
+}
